@@ -16,7 +16,6 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
-  syncfusion_flutter_sliders: ^26.2.14
 
 
 dev_dependencies:

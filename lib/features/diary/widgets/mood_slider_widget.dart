@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/core/utils/shadows.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class MoodSliderWidget extends StatefulWidget {
   const MoodSliderWidget({
@@ -25,6 +24,7 @@ class MoodSliderWidget extends StatefulWidget {
 
 class _MoodSliderWidgetState extends State<MoodSliderWidget> {
   double currentValue = 0.5;
+  bool isTouched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,14 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.title),
+          Text(
+            widget.title,
+            style: const TextStyle(
+              color: AppColors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           const SizedBox(height: 16),
           DecoratedBox(
             decoration: const BoxDecoration(
@@ -70,16 +77,25 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
                     ),
                   ),
                   SliderTheme(
-                    data: const SliderThemeData(
+                    data: SliderThemeData(
                       trackHeight: 6,
-                      activeTrackColor: AppColors.tangerine,
-                      thumbShape: PolygonSliderThumb(thumbRadius: 11),
-                      overlayShape: RoundSliderOverlayShape(overlayRadius: 1.0),
+                      activeTrackColor:
+                          isTouched ? AppColors.tangerine : AppColors.grey5,
+                      inactiveTrackColor: AppColors.grey5,
+                      thumbShape: PolygonSliderThumb(
+                        thumbRadius: 11,
+                        isTouched: isTouched,
+                      ),
+                      overlayShape:
+                          const RoundSliderOverlayShape(overlayRadius: 1.0),
                     ),
                     child: Slider(
                         value: currentValue,
                         onChanged: (newValue) {
                           setState(() {
+                            if (isTouched == false) {
+                              isTouched = true;
+                            }
                             currentValue = newValue;
                           });
                         }),
@@ -94,14 +110,16 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
                         Text(
                           widget.minValue,
                           style: TextStyle(
-                            color: AppColors.grey3,
+                            color:
+                                isTouched ? AppColors.grey3 : AppColors.grey5,
                             fontSize: 11,
                           ),
                         ),
                         Text(
                           widget.maxValue,
                           style: TextStyle(
-                            color: AppColors.grey3,
+                            color:
+                                isTouched ? AppColors.grey3 : AppColors.grey5,
                             fontSize: 11,
                           ),
                         ),
@@ -119,11 +137,13 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
 }
 
 class PolygonSliderThumb extends SliderComponentShape {
-  final double thumbRadius;
-
   const PolygonSliderThumb({
     required this.thumbRadius,
+    required this.isTouched,
   });
+
+  final double thumbRadius;
+  final bool isTouched;
 
   @override
   void paint(
@@ -143,7 +163,8 @@ class PolygonSliderThumb extends SliderComponentShape {
     final Canvas canvas = context.canvas;
 
     final circlePaint1 = Paint()..color = AppColors.white;
-    final circlePaint2 = Paint()..color = AppColors.tangerine;
+    final circlePaint2 = Paint()
+      ..color = isTouched ? AppColors.tangerine : AppColors.grey5;
 
     canvas.drawCircle(center, thumbRadius, circlePaint1);
     canvas.drawCircle(center, thumbRadius / 1.8, circlePaint2);

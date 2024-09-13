@@ -5,7 +5,7 @@ import 'package:moodiary/core/utils/icons.dart';
 import 'package:moodiary/core/utils/images.dart';
 import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/features/diary/widgets/mood_slider_widget.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:moodiary/features/diary/widgets/note_widget.dart';
 
 class DiaryScreen extends StatelessWidget {
   const DiaryScreen({super.key});
@@ -105,6 +105,7 @@ class DiaryScreen extends StatelessWidget {
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Stack(
           children: [
@@ -139,6 +140,17 @@ class DiaryScreen extends StatelessWidget {
             title: 'Уровень стресса',
             minValue: 'Низкий',
             maxValue: 'Высокий',
+            horizontalPadding: 20,
+            verticalPadding: 0,
+          ),
+          const MoodSliderWidget(
+            title: 'Самооценка',
+            minValue: 'Неуверенность',
+            maxValue: 'Уверенность',
+            horizontalPadding: 20,
+            verticalPadding: 0,
+          ),
+          NoteWidget(
             horizontalPadding: 20,
             verticalPadding: 0,
           ),

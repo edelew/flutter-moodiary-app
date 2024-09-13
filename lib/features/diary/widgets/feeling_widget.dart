@@ -50,7 +50,14 @@ class _FeelingWidgetState extends State<FeelingWidget> {
             padding: EdgeInsets.only(
               left: widget.horizontalPadding,
             ),
-            child: const Text('Что чувствуешь?'),
+            child: const Text(
+              'Что чувствуешь?',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
           ),
           const SizedBox(height: 16),
           SizedBox(
