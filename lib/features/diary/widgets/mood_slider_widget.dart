@@ -10,6 +10,7 @@ class MoodSliderWidget extends StatefulWidget {
     required this.maxValue,
     required this.horizontalPadding,
     required this.verticalPadding,
+    required this.updateData,
   });
 
   final String title;
@@ -17,6 +18,7 @@ class MoodSliderWidget extends StatefulWidget {
   final String maxValue;
   final double horizontalPadding;
   final double verticalPadding;
+  final void Function(double newValue) updateData;
 
   @override
   State<MoodSliderWidget> createState() => _MoodSliderWidgetState();
@@ -98,6 +100,7 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
                             }
                             currentValue = newValue;
                           });
+                          widget.updateData(newValue);
                         }),
                   ),
                   Padding(

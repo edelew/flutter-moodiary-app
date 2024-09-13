@@ -20,11 +20,13 @@ class FeelingWidget extends StatefulWidget {
     required this.feelings,
     required this.horizontalPadding,
     required this.verticalPadding,
+    required this.updateData,
   });
 
   final List<Feeling> feelings;
   final double horizontalPadding;
   final double verticalPadding;
+  final void Function(List<String> newValue) updateData;
 
   @override
   State<FeelingWidget> createState() => _FeelingWidgetState();
@@ -105,6 +107,8 @@ class _FeelingWidgetState extends State<FeelingWidget> {
         _choosenFeeling = feelings[index];
         _choosenTags = [];
       });
+
+      widget.updateData([]);
     }
   }
 
@@ -116,6 +120,13 @@ class _FeelingWidgetState extends State<FeelingWidget> {
         _choosenTags.add(index);
       }
     });
+
+    final feelingTags = List.generate(_choosenTags.length, (index) {
+      final currentIndex = _choosenTags[index];
+      return _choosenFeeling!.tags[currentIndex];
+    });
+
+    widget.updateData(feelingTags);
   }
 }
 

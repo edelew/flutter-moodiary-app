@@ -6,10 +6,12 @@ class SaveButtonWidget extends StatelessWidget {
     super.key,
     required this.horizontalPadding,
     required this.verticalPadding,
+    required this.isAble,
   });
 
   final double horizontalPadding;
   final double verticalPadding;
+  final bool isAble;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class SaveButtonWidget extends StatelessWidget {
         width: double.infinity,
         height: 44,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: isAble ? () {} : null,
           focusNode: FocusNode(),
           style: ElevatedButton.styleFrom(
             foregroundColor: AppColors.white,
