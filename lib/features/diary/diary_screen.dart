@@ -8,6 +8,7 @@ import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/features/diary/widgets/mood_slider_widget.dart';
 import 'package:moodiary/features/diary/widgets/note_widget.dart';
 import 'package:moodiary/features/diary/widgets/save_button_widget.dart';
+import 'package:moodiary/features/diary/widgets/tab_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 class DiaryScreen extends StatelessWidget {
@@ -138,58 +139,69 @@ class DiaryScreen extends StatelessWidget {
                 ],
               ),
             ),
-            body: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                children: [
-                  FeelingWidget(
-                    feelings: feelings,
-                    horizontalPadding: 20,
-                    verticalPadding: 16,
-                    updateData: (newValue) {
-                      context
-                          .read<SaveNotifier>()
-                          .updateData(feelingTags: newValue);
-                    },
+            body: Column(
+              children: [
+                const TabBarWidget(
+                  verticalPadding: 14,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        FeelingWidget(
+                          feelings: feelings,
+                          horizontalPadding: 20,
+                          verticalPadding: 16,
+                          updateData: (newValue) {
+                            context
+                                .read<SaveNotifier>()
+                                .updateData(feelingTags: newValue);
+                          },
+                        ),
+                        MoodSliderWidget(
+                          title: 'Уровень стресса',
+                          minValue: 'Низкий',
+                          maxValue: 'Высокий',
+                          horizontalPadding: 20,
+                          verticalPadding: 16,
+                          updateData: (newValue) {
+                            context
+                                .read<SaveNotifier>()
+                                .updateData(stressValue: newValue);
+                          },
+                        ),
+                        MoodSliderWidget(
+                          title: 'Самооценка',
+                          minValue: 'Неуверенность',
+                          maxValue: 'Уверенность',
+                          horizontalPadding: 20,
+                          verticalPadding: 16,
+                          updateData: (newValue) {
+                            context
+                                .read<SaveNotifier>()
+                                .updateData(selfesteemValue: newValue);
+                          },
+                        ),
+                        NoteWidget(
+                          horizontalPadding: 20,
+                          verticalPadding: 16,
+                          updateData: (newValue) {
+                            context
+                                .read<SaveNotifier>()
+                                .updateData(note: newValue);
+                          },
+                        ),
+                        SaveButtonWidget(
+                          horizontalPadding: 20,
+                          verticalPadding: 16,
+                          isAble: isFull,
+                        ),
+                      ],
+                    ),
                   ),
-                  MoodSliderWidget(
-                    title: 'Уровень стресса',
-                    minValue: 'Низкий',
-                    maxValue: 'Высокий',
-                    horizontalPadding: 20,
-                    verticalPadding: 16,
-                    updateData: (newValue) {
-                      context
-                          .read<SaveNotifier>()
-                          .updateData(stressValue: newValue);
-                    },
-                  ),
-                  MoodSliderWidget(
-                    title: 'Самооценка',
-                    minValue: 'Неуверенность',
-                    maxValue: 'Уверенность',
-                    horizontalPadding: 20,
-                    verticalPadding: 16,
-                    updateData: (newValue) {
-                      context
-                          .read<SaveNotifier>()
-                          .updateData(selfesteemValue: newValue);
-                    },
-                  ),
-                  NoteWidget(
-                    horizontalPadding: 20,
-                    verticalPadding: 16,
-                    updateData: (newValue) {
-                      context.read<SaveNotifier>().updateData(note: newValue);
-                    },
-                  ),
-                  SaveButtonWidget(
-                    horizontalPadding: 20,
-                    verticalPadding: 16,
-                    isAble: isFull,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
