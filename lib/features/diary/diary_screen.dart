@@ -12,8 +12,15 @@ import 'package:moodiary/features/diary/widgets/save_button_widget.dart';
 import 'package:moodiary/features/diary/widgets/tab_bar_widget.dart';
 import 'package:provider/provider.dart';
 
-class DiaryScreen extends StatelessWidget {
+class DiaryScreen extends StatefulWidget {
   const DiaryScreen({super.key});
+
+  @override
+  State<DiaryScreen> createState() => _DiaryScreenState();
+}
+
+class _DiaryScreenState extends State<DiaryScreen> {
+  bool isMain = true;
 
   @override
   Widget build(BuildContext context) {
@@ -141,75 +148,110 @@ class DiaryScreen extends StatelessWidget {
               ),
             ),
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const TabBarWidget(
+                TabBarWidget(
                   verticalPadding: 14,
+                  onTab: () {
+                    setState(() {
+                      isMain = !isMain;
+                    });
+                  },
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        FeelingWidget(
-                          feelings: feelings,
-                          horizontalPadding: 20,
-                          verticalPadding: 16,
-                          updateData: (newValue) {
-                            context
-                                .read<SaveNotifier>()
-                                .updateData(feelingTags: newValue);
-                          },
-                        ),
-                        MoodSliderWidget(
-                          title: 'Уровень стресса',
-                          minValue: 'Низкий',
-                          maxValue: 'Высокий',
-                          horizontalPadding: 20,
-                          verticalPadding: 16,
-                          updateData: (newValue) {
-                            context
-                                .read<SaveNotifier>()
-                                .updateData(stressValue: newValue);
-                          },
-                        ),
-                        MoodSliderWidget(
-                          title: 'Самооценка',
-                          minValue: 'Неуверенность',
-                          maxValue: 'Уверенность',
-                          horizontalPadding: 20,
-                          verticalPadding: 16,
-                          updateData: (newValue) {
-                            context
-                                .read<SaveNotifier>()
-                                .updateData(selfesteemValue: newValue);
-                          },
-                        ),
-                        NoteWidget(
-                          horizontalPadding: 20,
-                          verticalPadding: 16,
-                          updateData: (newValue) {
-                            context
-                                .read<SaveNotifier>()
-                                .updateData(note: newValue);
-                          },
-                        ),
-                        SaveButtonWidget(
-                          horizontalPadding: 20,
-                          verticalPadding: 16,
-                          isAble: isFull,
-                          onTap: () {
-                            SnackBarService.showSnackBar(
-                                context, 'Данные сохранены');
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                isMain
+                    ? MainSectionWidget(feelings: feelings, isFull: isFull)
+                    : const StatisticSectionWidget(),
+                // MainSectionWidget(feelings: feelings, isFull: isFull)
               ],
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class MainSectionWidget extends StatelessWidget {
+  const MainSectionWidget({
+    super.key,
+    required this.feelings,
+    required this.isFull,
+  });
+
+  final List<Feeling> feelings;
+  final bool isFull;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            FeelingWidget(
+              feelings: feelings,
+              horizontalPadding: 20,
+              verticalPadding: 16,
+              updateData: (newValue) {
+                context.read<SaveNotifier>().updateData(feelingTags: newValue);
+              },
+            ),
+            MoodSliderWidget(
+              title: 'Уровень стресса',
+              minValue: 'Низкий',
+              maxValue: 'Высокий',
+              horizontalPadding: 20,
+              verticalPadding: 16,
+              updateData: (newValue) {
+                context.read<SaveNotifier>().updateData(stressValue: newValue);
+              },
+            ),
+            MoodSliderWidget(
+              title: 'Самооценка',
+              minValue: 'Неуверенность',
+              maxValue: 'Уверенность',
+              horizontalPadding: 20,
+              verticalPadding: 16,
+              updateData: (newValue) {
+                context
+                    .read<SaveNotifier>()
+                    .updateData(selfesteemValue: newValue);
+              },
+            ),
+            NoteWidget(
+              horizontalPadding: 20,
+              verticalPadding: 16,
+              updateData: (newValue) {
+                context.read<SaveNotifier>().updateData(note: newValue);
+              },
+            ),
+            SaveButtonWidget(
+              horizontalPadding: 20,
+              verticalPadding: 16,
+              isAble: isFull,
+              onTap: () {
+                SnackBarService.showSnackBar(context, 'Данные сохранены');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StatisticSectionWidget extends StatelessWidget {
+  const StatisticSectionWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 120),
+      child: Center(
+        child: SvgPicture.asset(
+          AppIcons.statistics,
+          width: 80,
+        ),
       ),
     );
   }

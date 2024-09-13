@@ -7,9 +7,11 @@ class TabBarWidget extends StatefulWidget {
   const TabBarWidget({
     super.key,
     required this.verticalPadding,
+    required this.onTab,
   });
 
   final double verticalPadding;
+  final VoidCallback onTab;
 
   @override
   State<TabBarWidget> createState() => _TabBarWidgetState();
@@ -71,10 +73,13 @@ class _TabBarWidgetState extends State<TabBarWidget> {
               borderRadius: const BorderRadius.horizontal(
                 left: Radius.circular(47),
               ),
-              onTap: () => changePosition(
-                highIndicatorWidth: highIndicatorWidth,
-                lowIndicatorWidth: lowIndicatorWidth,
-              ),
+              onTap: () {
+                changePosition(
+                  highIndicatorWidth: highIndicatorWidth,
+                  lowIndicatorWidth: lowIndicatorWidth,
+                );
+                widget.onTab();
+              },
             ),
           ),
           Positioned(
@@ -86,10 +91,13 @@ class _TabBarWidgetState extends State<TabBarWidget> {
               borderRadius: const BorderRadius.horizontal(
                 right: Radius.circular(47),
               ),
-              onTap: () => changePosition(
-                highIndicatorWidth: highIndicatorWidth,
-                lowIndicatorWidth: lowIndicatorWidth,
-              ),
+              onTap: () {
+                changePosition(
+                  highIndicatorWidth: highIndicatorWidth,
+                  lowIndicatorWidth: lowIndicatorWidth,
+                );
+                widget.onTab();
+              },
             ),
           ),
         ],
