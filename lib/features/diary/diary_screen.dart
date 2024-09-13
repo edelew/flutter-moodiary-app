@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:moodiary/core/services/snack_bar_service.dart';
 import 'package:moodiary/features/diary/change_notifiers/save_notifier.dart';
 import 'package:moodiary/features/diary/widgets/feeling_widget.dart';
 import 'package:moodiary/core/utils/icons.dart';
@@ -196,6 +197,10 @@ class DiaryScreen extends StatelessWidget {
                           horizontalPadding: 20,
                           verticalPadding: 16,
                           isAble: isFull,
+                          onTap: () {
+                            SnackBarService.showSnackBar(
+                                context, 'Данные сохранены');
+                          },
                         ),
                       ],
                     ),
