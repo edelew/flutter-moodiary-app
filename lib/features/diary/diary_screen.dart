@@ -4,6 +4,8 @@ import 'package:moodiary/features/diary/widgets/feeling_widget.dart';
 import 'package:moodiary/core/utils/icons.dart';
 import 'package:moodiary/core/utils/images.dart';
 import 'package:moodiary/core/utils/colors.dart';
+import 'package:moodiary/features/diary/widgets/mood_slider_widget.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class DiaryScreen extends StatelessWidget {
   const DiaryScreen({super.key});
@@ -130,6 +132,13 @@ class DiaryScreen extends StatelessWidget {
         children: [
           FeelingWidget(
             feelings: feelings,
+            horizontalPadding: 20,
+            verticalPadding: 0,
+          ),
+          const MoodSliderWidget(
+            title: 'Уровень стресса',
+            minValue: 'Низкий',
+            maxValue: 'Высокий',
             horizontalPadding: 20,
             verticalPadding: 0,
           ),
