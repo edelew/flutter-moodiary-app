@@ -6,6 +6,7 @@ import 'package:moodiary/core/utils/images.dart';
 import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/features/diary/widgets/mood_slider_widget.dart';
 import 'package:moodiary/features/diary/widgets/note_widget.dart';
+import 'package:moodiary/features/diary/widgets/save_button_widget.dart';
 
 class DiaryScreen extends StatelessWidget {
   const DiaryScreen({super.key});
@@ -150,7 +151,11 @@ class DiaryScreen extends StatelessWidget {
             horizontalPadding: 20,
             verticalPadding: 0,
           ),
-          NoteWidget(
+          const NoteWidget(
+            horizontalPadding: 20,
+            verticalPadding: 0,
+          ),
+          const SaveButtonWidget(
             horizontalPadding: 20,
             verticalPadding: 0,
           ),
