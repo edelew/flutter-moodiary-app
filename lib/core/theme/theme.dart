@@ -5,8 +5,9 @@ ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundWhite,
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.backgroundWhite,
       foregroundColor: AppColors.grey,
+      surfaceTintColor: Colors.transparent,
       centerTitle: true,
     ),
     fontFamily: 'Nunito',

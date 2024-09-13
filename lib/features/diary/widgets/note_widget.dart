@@ -38,6 +38,7 @@ class _NoteWidgetState extends State<NoteWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: widget.horizontalPadding,
+        vertical: widget.verticalPadding,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

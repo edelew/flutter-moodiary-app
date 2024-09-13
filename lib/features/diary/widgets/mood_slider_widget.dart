@@ -33,6 +33,7 @@ class _MoodSliderWidgetState extends State<MoodSliderWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: widget.horizontalPadding,
+        vertical: widget.verticalPadding,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

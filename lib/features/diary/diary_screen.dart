@@ -138,55 +138,58 @@ class DiaryScreen extends StatelessWidget {
                 ],
               ),
             ),
-            body: Column(
-              children: [
-                FeelingWidget(
-                  feelings: feelings,
-                  horizontalPadding: 20,
-                  verticalPadding: 0,
-                  updateData: (newValue) {
-                    context
-                        .read<SaveNotifier>()
-                        .updateData(feelingTags: newValue);
-                  },
-                ),
-                MoodSliderWidget(
-                  title: 'Уровень стресса',
-                  minValue: 'Низкий',
-                  maxValue: 'Высокий',
-                  horizontalPadding: 20,
-                  verticalPadding: 0,
-                  updateData: (newValue) {
-                    context
-                        .read<SaveNotifier>()
-                        .updateData(stressValue: newValue);
-                  },
-                ),
-                MoodSliderWidget(
-                  title: 'Самооценка',
-                  minValue: 'Неуверенность',
-                  maxValue: 'Уверенность',
-                  horizontalPadding: 20,
-                  verticalPadding: 0,
-                  updateData: (newValue) {
-                    context
-                        .read<SaveNotifier>()
-                        .updateData(selfesteemValue: newValue);
-                  },
-                ),
-                NoteWidget(
-                  horizontalPadding: 20,
-                  verticalPadding: 0,
-                  updateData: (newValue) {
-                    context.read<SaveNotifier>().updateData(note: newValue);
-                  },
-                ),
-                SaveButtonWidget(
-                  horizontalPadding: 20,
-                  verticalPadding: 0,
-                  isAble: isFull,
-                ),
-              ],
+            body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: [
+                  FeelingWidget(
+                    feelings: feelings,
+                    horizontalPadding: 20,
+                    verticalPadding: 16,
+                    updateData: (newValue) {
+                      context
+                          .read<SaveNotifier>()
+                          .updateData(feelingTags: newValue);
+                    },
+                  ),
+                  MoodSliderWidget(
+                    title: 'Уровень стресса',
+                    minValue: 'Низкий',
+                    maxValue: 'Высокий',
+                    horizontalPadding: 20,
+                    verticalPadding: 16,
+                    updateData: (newValue) {
+                      context
+                          .read<SaveNotifier>()
+                          .updateData(stressValue: newValue);
+                    },
+                  ),
+                  MoodSliderWidget(
+                    title: 'Самооценка',
+                    minValue: 'Неуверенность',
+                    maxValue: 'Уверенность',
+                    horizontalPadding: 20,
+                    verticalPadding: 16,
+                    updateData: (newValue) {
+                      context
+                          .read<SaveNotifier>()
+                          .updateData(selfesteemValue: newValue);
+                    },
+                  ),
+                  NoteWidget(
+                    horizontalPadding: 20,
+                    verticalPadding: 16,
+                    updateData: (newValue) {
+                      context.read<SaveNotifier>().updateData(note: newValue);
+                    },
+                  ),
+                  SaveButtonWidget(
+                    horizontalPadding: 20,
+                    verticalPadding: 16,
+                    isAble: isFull,
+                  ),
+                ],
+              ),
             ),
           );
         },

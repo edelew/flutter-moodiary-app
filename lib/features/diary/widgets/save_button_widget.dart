@@ -18,6 +18,7 @@ class SaveButtonWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPadding,
+        vertical: verticalPadding,
       ),
       child: SizedBox(
         width: double.infinity,

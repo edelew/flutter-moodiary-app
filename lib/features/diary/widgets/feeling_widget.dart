@@ -41,9 +41,8 @@ class _FeelingWidgetState extends State<FeelingWidget> {
     final feelings = widget.feelings;
 
     return Padding(
-      padding: EdgeInsets.only(
-        top: widget.verticalPadding,
-        bottom: widget.verticalPadding,
+      padding: EdgeInsets.symmetric(
+        vertical: widget.verticalPadding,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
