@@ -7,14 +7,9 @@ import 'package:moodiary/features/calendar/widgets/calendar_widget.dart';
 import 'package:moodiary/features/calendar/widgets/week_days_widget.dart';
 import 'package:provider/provider.dart';
 
-class CalendarScreen extends StatefulWidget {
+class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
 
-  @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
-}
-
-class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +24,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         title: Align(
           alignment: Alignment.centerRight,
           child: GestureDetector(
-            onTap: () {
-              final today = DateTimeFunc.today();
-              context.read<DateNotifier>().changeDate(today);
-            },
+            onTap: () => onTodayTap(context),
             child: const Text(
               'Сегодня',
               style: TextStyle(
@@ -45,17 +37,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Expanded(
-          child: Column(
-            children: [
-              WeekDaysWidget(),
-              Expanded(
-                child: CalendarWidget(),
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            WeekDaysWidget(),
+            Expanded(
+              child: CalendarWidget(),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void onTodayTap(BuildContext context) {
+    final today = DateTimeFunc.today();
+    context.read<DateNotifier>().changeDate(today);
+    Navigator.of(context).pop();
   }
 }

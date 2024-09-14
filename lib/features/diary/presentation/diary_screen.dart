@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:moodiary/app/notifiers/date_notifier.dart';
-import 'package:moodiary/app/servises/snack_bar_service.dart';
-import 'package:moodiary/features/calendar/calendar_screen.dart';
-import 'package:moodiary/features/diary/notifiers/save_notifier.dart';
-import 'package:moodiary/features/diary/widgets/feeling_widget.dart';
+import 'package:moodiary/app/services/snack_bar_service.dart';
+import 'package:moodiary/features/calendar/presentation/calendar_screen.dart';
+import 'package:moodiary/features/diary/data/mock_data/feeling_mock_data.dart';
+import 'package:moodiary/features/diary/presentation/notifiers/save_notifier.dart';
+import 'package:moodiary/features/diary/presentation/widgets/feeling_widget.dart';
 import 'package:moodiary/core/utils/icons.dart';
-import 'package:moodiary/core/utils/images.dart';
 import 'package:moodiary/core/utils/colors.dart';
-import 'package:moodiary/features/diary/widgets/mood_slider_widget.dart';
-import 'package:moodiary/features/diary/widgets/note_widget.dart';
-import 'package:moodiary/features/diary/widgets/save_button_widget.dart';
-import 'package:moodiary/features/diary/widgets/tab_bar_widget.dart';
+import 'package:moodiary/features/diary/presentation/widgets/mood_slider_widget.dart';
+import 'package:moodiary/features/diary/presentation/widgets/note_widget.dart';
+import 'package:moodiary/features/diary/presentation/widgets/save_button_widget.dart';
+import 'package:moodiary/features/diary/presentation/widgets/tab_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 class DiaryScreen extends StatefulWidget {
@@ -27,98 +27,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final feelings = [
-      Feeling(
-        image: AppImages.joy,
-        name: 'Радость',
-        tags: [
-          'Возбуждение',
-          'Восторг',
-          'Игривость',
-          'Наслаждение',
-          'Очарование',
-          'Осознанность',
-          'Смелость',
-          'Удовольствие',
-          'Чувственность',
-          'Энергичность',
-          'Экстравагантность',
-        ],
-      ),
-      Feeling(
-        image: AppImages.fear,
-        name: 'Страх',
-        tags: [
-          'Напряжение',
-          'Оцепенение',
-          'Тревожность',
-          'Одиночество',
-          'Уязвимость',
-          'Растерянность',
-          'Беспомощность',
-          'Подавленность',
-          'Недоверие',
-        ],
-      ),
-      Feeling(
-        image: AppImages.rabies,
-        name: 'Бешенство',
-        tags: [
-          'Ярость',
-          'Гнев',
-          'Одержимость',
-          'Вспыльчивость',
-          'Потеря контроля',
-          'Агрессия',
-        ],
-      ),
-      Feeling(
-        image: AppImages.sadness,
-        name: 'Грусть',
-        tags: [
-          'Печаль',
-          'Меланхолия',
-          'Одиночество',
-          'Тоска',
-          'Опустошение',
-          'Ностальгия',
-          'Уныние',
-          'Сожаление',
-          'Разочарование',
-        ],
-      ),
-      Feeling(
-        image: AppImages.serenity,
-        name: 'Спокойствие',
-        tags: [
-          'Умиротворение',
-          'Гармония',
-          'Равновесие',
-          'Тишина',
-          'Безмятежность',
-          'Баланс',
-          'Расслабленность',
-          'Стабильность',
-          'Ясность',
-          'Непоколебимость',
-        ],
-      ),
-      Feeling(
-        image: AppImages.strength,
-        name: 'Сила',
-        tags: [
-          'Стойкость',
-          'Воля',
-          'Энергия',
-          'Уверенность',
-          'Решимость',
-          'Влияние',
-          'Выносливость',
-          'Дерзость',
-        ],
-      ),
-    ];
-
     return ChangeNotifierProvider(
       create: (context) => SaveNotifier(),
       child: Consumer<SaveNotifier>(
@@ -174,7 +82,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   },
                 ),
                 isMain
-                    ? MainSectionWidget(feelings: feelings, isFull: isFull)
+                    ? MainSectionWidget(
+                        feelings: FeelingMockData.feelings,
+                        isFull: isFull,
+                      )
                     : const StatisticSectionWidget(),
               ],
             ),
@@ -192,7 +103,7 @@ class MainSectionWidget extends StatelessWidget {
     required this.isFull,
   });
 
-  final List<Feeling> feelings;
+  final List<FeelingEntity> feelings;
   final bool isFull;
 
   @override

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/core/utils/shadows.dart';
 
-class Feeling {
-  Feeling({
+class FeelingEntity {
+  FeelingEntity({
     required this.image,
     required this.name,
     required this.tags,
@@ -23,7 +23,7 @@ class FeelingWidget extends StatefulWidget {
     required this.updateData,
   });
 
-  final List<Feeling> feelings;
+  final List<FeelingEntity> feelings;
   final double horizontalPadding;
   final double verticalPadding;
   final void Function(List<String> newValue) updateData;
@@ -33,7 +33,7 @@ class FeelingWidget extends StatefulWidget {
 }
 
 class _FeelingWidgetState extends State<FeelingWidget> {
-  Feeling? _choosenFeeling;
+  FeelingEntity? _choosenFeeling;
   List<int> _choosenTags = [];
 
   @override
@@ -100,7 +100,7 @@ class _FeelingWidgetState extends State<FeelingWidget> {
     );
   }
 
-  void onCardTap(List<Feeling> feelings, int index) {
+  void onCardTap(List<FeelingEntity> feelings, int index) {
     if (_choosenFeeling != feelings[index]) {
       setState(() {
         _choosenFeeling = feelings[index];
@@ -139,7 +139,7 @@ class FeelingCardWidget extends StatelessWidget {
     required this.onTap,
   });
 
-  final List<Feeling> feelings;
+  final List<FeelingEntity> feelings;
   final int index;
   final double width;
   final bool isChoosen;
