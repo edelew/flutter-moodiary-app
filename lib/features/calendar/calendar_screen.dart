@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moodiary/app/extensions/date_time_func.dart';
 import 'package:moodiary/app/notifiers/date_notifier.dart';
 import 'package:moodiary/core/utils/icons.dart';
-import 'package:moodiary/features/calendar/widgets/calendar_widget.dart';
-import 'package:moodiary/features/calendar/widgets/week_days_widget.dart';
+import 'package:moodiary/features/calendar/presentation/widgets/calendar_widget.dart';
+import 'package:moodiary/features/calendar/presentation/widgets/week_days_widget.dart';
 import 'package:provider/provider.dart';
 
 class CalendarScreen extends StatelessWidget {

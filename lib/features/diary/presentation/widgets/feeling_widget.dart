@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moodiary/core/utils/colors.dart';
 import 'package:moodiary/core/utils/shadows.dart';
-
-class FeelingEntity {
-  FeelingEntity({
-    required this.image,
-    required this.name,
-    required this.tags,
-  });
-
-  final String image;
-  final String name;
-  final List<String> tags;
-}
+import 'package:moodiary/features/diary/data/entities/feeling_entity.dart';
 
 class FeelingWidget extends StatefulWidget {
   const FeelingWidget({

@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:moodiary/app/notifiers/date_notifier.dart';
 import 'package:moodiary/app/services/snack_bar_service.dart';
-import 'package:moodiary/features/calendar/presentation/calendar_screen.dart';
+import 'package:moodiary/features/calendar/calendar_screen.dart';
+import 'package:moodiary/features/diary/data/entities/feeling_entity.dart';
 import 'package:moodiary/features/diary/data/mock_data/feeling_mock_data.dart';
 import 'package:moodiary/features/diary/presentation/notifiers/save_notifier.dart';
 import 'package:moodiary/features/diary/presentation/widgets/feeling_widget.dart';
@@ -37,7 +38,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
           var formattedDate = DateFormat.yMMMMd('ru_RU').format(date);
 
           return Scaffold(
-            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: Stack(
                 children: [

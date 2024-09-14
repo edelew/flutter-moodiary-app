@@ -1,5 +1,5 @@
 import 'package:moodiary/core/utils/images.dart';
-import 'package:moodiary/features/diary/presentation/widgets/feeling_widget.dart';
+import 'package:moodiary/features/diary/data/entities/feeling_entity.dart';
 
 abstract class FeelingMockData {
   static final feelings = [
