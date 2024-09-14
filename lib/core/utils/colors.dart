@@ -9,4 +9,5 @@ abstract class AppColors {
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const backgroundWhite = Color.fromRGBO(255, 253, 252, 1);
   static const tangerine = Color.fromRGBO(255, 135, 2, 1);
+  static const lightTangerine = Color.fromRGBO(255, 135, 2, 0.25);
 }

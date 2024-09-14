@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moodiary/core/theme/theme.dart';
-import 'package:moodiary/features/diary/diary_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:moodiary/app/presentation/moodiary_app.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      //       routes: {
-      //   '/': (context) => DiaryScreen(),
-      //   '/calendar': (context) => CalendarScreen(),
-      // },
-      home: const DiaryScreen(),
-    );
-  }
+  initializeDateFormatting('ru_RU', null)
+      .then((_) => runApp(const MoodiaryApp()));
 }

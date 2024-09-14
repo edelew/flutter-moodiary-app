@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SaveNotifier extends ChangeNotifier {
-  var saveData = SaveData();
+  var _saveData = SaveData();
+  SaveData get saveData => _saveData;
 
   void updateData({
     List<String>? feelingTags,
@@ -9,7 +10,7 @@ class SaveNotifier extends ChangeNotifier {
     double? selfesteemValue,
     String? note,
   }) {
-    saveData = saveData.copyWith(
+    _saveData = _saveData.copyWith(
       feelingTags: feelingTags,
       stressValue: stressValue,
       selfesteemValue: selfesteemValue,

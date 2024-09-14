@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:moodiary/core/services/snack_bar_service.dart';
+import 'package:intl/intl.dart';
+import 'package:moodiary/app/notifiers/date_notifier.dart';
+import 'package:moodiary/app/servises/snack_bar_service.dart';
 import 'package:moodiary/features/calendar/calendar_screen.dart';
-import 'package:moodiary/features/diary/change_notifiers/save_notifier.dart';
+import 'package:moodiary/features/diary/notifiers/save_notifier.dart';
 import 'package:moodiary/features/diary/widgets/feeling_widget.dart';
 import 'package:moodiary/core/utils/icons.dart';
 import 'package:moodiary/core/utils/images.dart';
@@ -122,17 +124,20 @@ class _DiaryScreenState extends State<DiaryScreen> {
       child: Consumer<SaveNotifier>(
         builder: (context, saveNotifier, child) {
           final isFull = saveNotifier.saveData.isFull();
+          final date = context.watch<DateNotifier>().date;
+
+          var formattedDate = DateFormat.yMMMMd('ru_RU').format(date);
 
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: Stack(
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.center,
                     child: Text(
-                      '1 января 09:00',
-                      style: TextStyle(
+                      formattedDate,
+                      style: const TextStyle(
                         color: AppColors.grey,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
